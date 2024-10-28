@@ -3,6 +3,8 @@ import os
 import requests
 
 from fastapi import FastAPI
+ 
+from models import BreedModel, BreedListModel
 
 app = FastAPI()
 
@@ -27,7 +29,8 @@ def get_breeds(limit: int = 10, page: int = 0):
     }
     url = f"{base_url}/breeds?limit={limit}&page={page}"
     response = requests.get(url, headers=headers)
-    return response.json()
+    return BreedListModel(breeds=response.json())
+    # return response.json()
 
 
 @app.get("/breeds/{breed_id}")
@@ -44,4 +47,4 @@ def get_breed(breed_id: str):
     }
     url = f"{base_url}/breeds/{breed_id}"
     response = requests.get(url, headers=headers)
-    return response.json()
+    return BreedModel(**response.json())
