@@ -14,7 +14,7 @@ def read_root():
     return {"status": "ok"}
 
 @app.get("/breeds/")
-def get_breeds(limit: int = 10, page: int = 0):
+def get_breeds(limit: int = 10, page: int = 0) -> BreedListModel:
     """Endpoint to get all breeds from The Dog API.
     https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=bOoHBz-8t
     Args:
@@ -34,7 +34,7 @@ def get_breeds(limit: int = 10, page: int = 0):
 
 
 @app.get("/breeds/{breed_id}")
-def get_breed(breed_id: str):
+def get_breed(breed_id: str) -> BreedModel:
     """Endpoint to get a breed by ID from The Dog API.
     Args:
         breed_id (str): ID of the breed to return.
