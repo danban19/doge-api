@@ -1,0 +1,34 @@
+version: "3.9"
+name: "doge-api"
+
+services:
+  database:
+    image: pgvector/pgvector:0.6.0-pg16
+    container_name: doge-api-database
+    restart: always
+    user: postgres
+    environment:
+      POSTGRES_DB: doge_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: 5432
+    ports:
+      - 5432:5432
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./docker-compose.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  database:
+    name: doge-api-database
+    driver: local
+
+networks:
+  default:
+    name: doge-api-default
+    driver: bridge

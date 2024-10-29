@@ -3,23 +3,25 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 
-class BreedWeightModel(BaseModel):
+class BreedWeightResponseModel(BaseModel):
     """DTO model for the weight of a breed."""
     imperial: str
     metric: str
 
-class BreedHeightModel(BreedWeightModel):
-    """DTO model for the height of a breed."""
-    pass
 
-class BreedImageModel(BaseModel):
+class BreedHeightResponseModel(BreedWeightResponseModel):
+    """DTO model for the height of a breed."""
+
+
+class BreedImageResponseModel(BaseModel):
     """DTO model for the image of a breed."""
     id: str
     width: int
     height: int
     url: str
 
-class BreedModel(BaseModel):
+
+class BreedResponseModel(BaseModel):
     """DTO model for a breed."""
     id: int
     name: str
@@ -30,10 +32,11 @@ class BreedModel(BaseModel):
     temperament: str
     origin: Optional[str] = None
     reference_image_id: str
-    weight: BreedWeightModel
-    height: BreedHeightModel
-    image: Optional[BreedImageModel] = None
+    weight: BreedWeightResponseModel
+    height: BreedHeightResponseModel
+    image: Optional[BreedImageResponseModel] = None
 
-class BreedListModel(BaseModel):
+
+class BreedListResponseModel(BaseModel):
     """DTO model for a list of breeds."""
-    breeds: List[BreedModel]
+    breeds: List[BreedResponseModel]
