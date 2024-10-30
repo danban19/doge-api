@@ -13,20 +13,25 @@ Use the following link and follow the instructions to install Poetry: https://py
 https://docs.docker.com/engine/install/
 
 ### Install PostgreSQL
-sudo apt install postgresql postgresql-contrib
-
-In case of issues with PostgreSQL dependencies: sudo apt-get install libpq-dev
+[sudo apt install postgresql postgresql-contrib](https://www.postgresql.org/download/)
 
 ### Install dependencies
+```sh
 cd src
 poetry install
-
+```
 
 ### Activate virtual environment
+```sh
 poetry shell
+```
 
 ### Start PostgreSQL server
+```sh
 docker compose up
+```
 
 ### Run server
+```sh
 uvicorn main:app --reload --env-file .env
+```
