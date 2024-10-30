@@ -13,12 +13,22 @@ Use the following link and follow the instructions to install Poetry: https://py
 https://docs.docker.com/engine/install/
 
 ### Install PostgreSQL
-[sudo apt install postgresql postgresql-contrib](https://www.postgresql.org/download/)
+https://www.postgresql.org/download/
 
 ### Copy .env file into /src folder
 
 ### Run the app
+Inside src/ directory:
 ```sh
 docker compose up
 ```
 Starts PostgreSQL database and API.
+
+### Linting
+In root directory:
+```sh
+flake8 src/
+```
+```sh
+mypy src/
+```

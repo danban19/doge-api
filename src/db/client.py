@@ -1,10 +1,11 @@
 """Database connection and session management."""
 import os
 
+from typing import Generator
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy.orm import sessionmaker, Session
 
 DATABASE_URL = "".join(
     [
@@ -15,7 +16,7 @@ DATABASE_URL = "".join(
         "@",
         f"{os.environ.get('DB_HOST', 'localhost')}:{os.environ.get('DB_PORT', '5432')}",
         "/",
-        os.environ.get("DB_NAME", None)
+        os.environ.get("DB_NAME", "doge_db")
     ]
 )
 
@@ -26,8 +27,10 @@ session = SessionLocal()
 Base = declarative_base()
 Base.metadata.create_all(engine)
 
-def get_db():
-    """Function to get the database session."""
+
+def get_db() -> Generator[Session, None, None]:
+    """Function to get the database session.
+    """
     db = SessionLocal()
     try:
         yield db

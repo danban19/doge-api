@@ -1,7 +1,10 @@
 """Module containing the SQLAlchemy models for the database."""
 from sqlalchemy import Column, Integer, String, JSON
+from sqlalchemy.orm import DeclarativeBase
 
-from .client import Base
+
+class Base(DeclarativeBase):
+    """Base class for the SQLAlchemy models."""
 
 
 class BreedSQLModel(Base):

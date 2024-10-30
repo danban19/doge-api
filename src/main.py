@@ -11,17 +11,19 @@ from response_models import BreedResponseModel, BreedListResponseModel
 
 app = FastAPI()
 
+
 # Create tables on startup
 @app.on_event("startup")
-def on_startup():
+def on_startup() -> None:
     """"Startup event to create tables in the database."""
     Base.metadata.create_all(bind=engine)
 
 
 @app.get("/health")
-async def read_root():
+async def read_root() -> dict[str, str]:
     """Endpoint to check the health of the application."""
     return {"status": "ok"}
+
 
 @app.get("/breeds/")
 async def get_breeds(limit: int = 10, page: int = 0) -> BreedListResponseModel:
