@@ -19,11 +19,30 @@ services:
       - ./docker-compose.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
-      interval: 15s
-      timeout: 5s
+      interval: 10s
       retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
 
 volumes:
+  app:
+    name: doge-api-app
+    driver: local
   database:
     name: doge-api-database
     driver: local

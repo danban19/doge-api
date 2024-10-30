@@ -15,23 +15,10 @@ https://docs.docker.com/engine/install/
 ### Install PostgreSQL
 [sudo apt install postgresql postgresql-contrib](https://www.postgresql.org/download/)
 
-### Install dependencies
-```sh
-cd src
-poetry install
-```
+### Copy .env file into /src folder
 
-### Activate virtual environment
-```sh
-poetry shell
-```
-
-### Start PostgreSQL server
+### Run the app
 ```sh
 docker compose up
 ```
-
-### Run server
-```sh
-uvicorn main:app --reload --env-file .env
-```
+Starts PostgreSQL database and API.
