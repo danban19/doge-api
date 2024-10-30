@@ -32,3 +32,9 @@ flake8 src/
 ```sh
 mypy src/
 ```
+
+### Pre-commit hooks
+Pre-commit hooks are installed when running `docker compose up` command, but you can run it manually:
+```sh
+pre-commit install
+```

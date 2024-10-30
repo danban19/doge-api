@@ -8,6 +8,8 @@ RUN pip install --no-cache-dir poetry && \
     poetry config virtualenvs.create false && \
     poetry install --no-dev
 
+RUN pre-commit install
+
 COPY . /app
 
 EXPOSE 8000
