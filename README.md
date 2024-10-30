@@ -32,9 +32,3 @@ flake8 src/
 ```sh
 mypy src/
 ```
-
-### Pre-commit hooks
-Run the following command to install pre-commit hooks:
-```sh
-pre-commit install
-```
