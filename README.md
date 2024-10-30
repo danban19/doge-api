@@ -34,7 +34,7 @@ mypy src/
 ```
 
 ### Pre-commit hooks
-Pre-commit hooks are installed when running `docker compose up` command, but you can run it manually:
+Run the following command to install pre-commit hooks:
 ```sh
 pre-commit install
 ```
