@@ -1,7 +1,8 @@
 """Module containing the SQLAlchemy models for the database."""
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, JSON
 
 from .client import Base
+
 
 class BreedSQLModel(Base):
     """SQL Model for the breeds table."""
@@ -16,8 +17,6 @@ class BreedSQLModel(Base):
     temperament = Column(String)
     origin = Column(String)
     reference_image_id = Column(String)
-    weight_imperial = Column(String)
-    weight_metric = Column(String)
-    height_imperial = Column(String)
-    height_metric = Column(String)
-    image = Column(String)
+    weight = Column(JSON)
+    height = Column(JSON)
+    image = Column(JSON)

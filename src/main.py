@@ -7,7 +7,6 @@ import polars as pl
 
 from db.client import Base, engine, session
 from db.db_models import BreedSQLModel
-from helpers import flatten_dict
 from response_models import BreedResponseModel, BreedListResponseModel
 
 app = FastAPI()
@@ -62,8 +61,7 @@ async def get_breed(breed_id: str) -> BreedResponseModel:
 
     # Save the breed to the database
     data = response.json()
-    flatten_data = flatten_dict(response.json())
-    df = pl.DataFrame([flatten_data])
+    df = pl.DataFrame([data])
 
     for row in df.to_dicts():
         db_breed = BreedSQLModel(**row)
@@ -72,3 +70,15 @@ async def get_breed(breed_id: str) -> BreedResponseModel:
     session.commit()
 
     return BreedResponseModel(**data)
+
+
+@app.get("/browsed-breeds")
+async def get_saved_breeds() -> BreedListResponseModel:
+    """Endpoint to get all the previously browsed breeds from the database.
+    Returns:
+        dict: JSON response from the database.
+    """
+    breeds = session.query(BreedSQLModel).all()
+    breeds_dict = [breed.__dict__ for breed in breeds]
+
+    return BreedListResponseModel(breeds=breeds_dict)
